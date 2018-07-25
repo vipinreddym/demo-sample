@@ -1,17 +1,15 @@
 <div class="container">
   <div class="row">
-  
-  <br>
-    
-    Europen currency:
+
+    <br> Europen currency:
     <input type="text" name="currency" [(ngModel)]="data.currency" #currency="ngModel">
-   
+
     <select [(ngModel)]="selectedValue">
       <option *ngFor="let c of rates" name="some" [ngValue]="c">{{c.name}}</option>
 
     </select>
     <button (click)="exchange(data.currency,selectedValue.name)" type="submit" class="btn btn-primary">click</button>
     <input type="text" name="showdata" value="{{showdata}}">
-  
-    
+
+
   </div>
