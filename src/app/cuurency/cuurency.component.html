@@ -1,15 +1,27 @@
 <div class="container">
   <div class="row">
-
-    <br> Europen currency:
-    <input type="text" name="currency" [(ngModel)]="data.currency" #currency="ngModel">
-
+    <div class="col-xs-12">
+    <div class="col-xs-6">
+      <br> Enter currency type:
     <select [(ngModel)]="selectedValue">
-      <option *ngFor="let c of rates" name="some" [ngValue]="c">{{c.name}}</option>
+      <option value = ''>select currency</option>
+      <option *ngFor="let c of ratekeys" name="some" >{{c}}</option>
 
     </select>
-    <button (click)="exchange(data.currency,selectedValue.name)" type="submit" class="btn btn-primary">click</button>
-    <input type="text" name="showdata" value="{{showdata}}">
+    <input type="text" name="currency" [(ngModel)]="data.currency" #currency="ngModel">
+    </div>
+    <div class="col-xs-6">
+   <br>
+    
+    <input type="text" name="convertCurrency" value="{{convertCurrency}}">
+     <select [(ngModel)]="selectedValue1">
+        <option value = ''>select currency</option>
+      <option *ngFor="let c of ratekeys" name="somevalue">{{c}}</option>
 
-
+    </select>
+    
+    <button (click)="exchange(data.currency,selectedValue,selectedValue1)" type="submit" class="btn btn-primary">click</button>
+    <button (click)="reset()" type="submit" class="btn btn-primary">Reset</button>  
+  </div>
+  </div>
   </div>

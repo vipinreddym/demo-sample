@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RateService }from '../rate.service';
+import { RateService } from '../rate.service';
 
 @Component({
   selector: 'app-cuurency',
@@ -7,52 +7,72 @@ import { RateService }from '../rate.service';
   styleUrls: ['./cuurency.component.css']
 })
 export class CuurencyComponent implements OnInit {
-  public rupe : any;
-  showdata:any;
-  data ={}
-  curr:any={
-rates:{}
-
-  }
-  rates:any = [
-    {id: 1, name: "AED"},
-    {id: 2, name: "AFN"},
-    {id: 3, name: "ALL"},
-    {id: 4, name: "INR"},
-    {id: 5, name: "AUD"}
-  ];
-   selectedValue = null;
   
-   constructor(private rateservices: RateService) { }
+  public convertedchoice: any;
+  public ratekeys: any;
+  public rateslist: any;
+  public userchoice: any;
+  public convertCurrency: any;
+  public finalresult: any;
+  public selectedValue: any;
+  public selectedValue1: any;
+  data = {
+    currency : ''
+  }
+  currencyrates: any = {
+    rates: {}
+  }
+
+
+  constructor(private rateservices: RateService) { }
 
   ngOnInit() {
 
     this.rateservices.getdata()
-    .subscribe(
-      (response)=>{
-        console.log(response);
-        this.curr=response;
-        console.log(this.curr.rates.INR);
+      .subscribe(
+        (response) => {
+
+          this.currencyrates = response;
+          this.rateslist = this.currencyrates.rates;
+          this.ratekeys = Object.keys(this.rateslist);
+          }
+        )
       }
+
+
+
+  exchange(userinput, country, resultent) {
+ console.log(userinput,country,resultent);
+
+    // console.log(this.currencyrates.rates[country]);
+    // console.log(this.currencyrates.rates[resultent]);
+
+    this.userchoice = this.currencyrates.rates[country];
+    this.convertedchoice = this.currencyrates.rates[resultent];
+    if (userinput === undefined || this.userchoice === undefined || this.convertedchoice === undefined) {
+      alert("please fill data")
+    }
+    else {
+      this.convertCurrency = (this.convertedchoice * userinput) / this.userchoice
+      console.log(this.convertCurrency);
+
+    }
     
-    )
-
+    
+    
   }
-exchange(curency1,country){
-console.log(country);
 
-for(let con in this.curr.rates){
-if(country==con){
-  this. showdata=curency1*this.curr.rates[con]
+  reset(){
+  this.data.currency = '',
+  this.selectedValue = '',
+  this.selectedValue1 = '',
+  this.convertCurrency = '';
 }
-
-  console.log(con);
-} 
-// ;
   
-
-
 }
 
 
-}
+
+
+
+
